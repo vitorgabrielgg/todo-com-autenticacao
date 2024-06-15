@@ -4,12 +4,18 @@ import { Input } from "../Input";
 import { ButtonForm } from "../ButtonForm";
 import { LinkForm } from "../LinkForm";
 import { FormAuthType, useFormAuth } from "@/hooks";
+import { createUser } from "@/services/createUser";
+import { useRouter } from "next/navigation";
 
 export const FormRegister = () => {
   const { errors, register, handleSubmit } = useFormAuth();
+  const router = useRouter();
 
-  const registerUser = (data: FormAuthType) => {
-    console.log(data);
+  const registerUser = async (data: FormAuthType) => {
+    const { msg } = await createUser(data);
+    if (msg.type === "success") {
+      router.push("/login");
+    }
   };
 
   return (
