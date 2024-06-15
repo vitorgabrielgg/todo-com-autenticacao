@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html>
       <body className={inter.className}>
         <div className="bg-bg_login_and_register min-h-screen flex justify-center items-center w-full">
           {children}

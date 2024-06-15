@@ -4,8 +4,8 @@ import { Input } from "../Input";
 import { ButtonForm } from "../ButtonForm";
 import { LinkForm } from "../LinkForm";
 import { FormAuthType, useFormAuth } from "@/hooks";
-import { createUser } from "@/services/createUser";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/services";
 
 export const FormRegister = () => {
   const { errors, register, handleSubmit } = useFormAuth();

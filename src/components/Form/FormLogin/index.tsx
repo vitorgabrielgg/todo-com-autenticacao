@@ -1,16 +1,26 @@
 "use client";
 
-import { FormAuthType, useFormAuth } from "@/hooks";
-import React from "react";
+import { FormAuthType, useFormAuth, useToken } from "@/hooks";
+
 import { Input } from "../Input";
 import { LinkForm } from "../LinkForm";
 import { ButtonForm } from "../ButtonForm";
 
+import { loginUser } from "@/services";
+import { useRouter } from "next/navigation";
+
 export const FormLogin = () => {
   const { errors, handleSubmit, register } = useFormAuth();
+  const { setToken } = useToken();
+  const router = useRouter();
 
-  const login = (data: FormAuthType) => {
-    console.log(data);
+  const login = async (data: FormAuthType) => {
+    const { jwtToken, msg } = await loginUser(data);
+    if (jwtToken) {
+      setToken(jwtToken);
+      localStorage.setItem("token", jwtToken);
+      router.push("/");
+    }
   };
   return (
     <form className="flex flex-col mt-8 gap-6" onSubmit={handleSubmit(login)}>
