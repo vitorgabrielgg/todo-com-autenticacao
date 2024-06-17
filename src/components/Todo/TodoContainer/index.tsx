@@ -1,7 +1,10 @@
+import { useTasks } from "@/hooks";
 import { InfoTasks } from "../InfoTasks";
 import { TodoForm } from "../TodoForm";
 
 export const TodoContainer = () => {
+  const { tasksTodo } = useTasks();
+  console.log(tasksTodo);
   return (
     <div className="bg-bg_login_and_register min-h-screen w-full text-white flex items-center flex-col">
       <div className="max-w-4xl w-full px-5 mt-10">
