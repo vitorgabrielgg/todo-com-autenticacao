@@ -28,4 +28,16 @@ export const taskServices = {
 
     return NextResponse.json({ task });
   },
+
+  getTasks: async (req: NextRequest, { params }: ParamsTask) => {
+    const { id } = params;
+
+    const tasks = await prisma.task.findMany({
+      where: {
+        userId: id,
+      },
+    });
+
+    return NextResponse.json({ tasks });
+  },
 };

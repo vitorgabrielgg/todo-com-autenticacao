@@ -10,17 +10,11 @@ export default function Home() {
   const { token } = useToken();
   const router = useRouter();
 
-  const { user, getUser } = useUser();
-
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  useEffect(() => {
-    getUser();
-  }, [getUser]);
 
   if (!token) {
     router.push("/login");

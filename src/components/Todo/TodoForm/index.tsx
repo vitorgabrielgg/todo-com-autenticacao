@@ -3,16 +3,17 @@
 import { useTasks, useUser } from "@/hooks";
 import { FormEvent, useRef } from "react";
 
-export const TodoForm = () => {
-  const { addTask } = useTasks();
-  const { user } = useUser();
+export const TodoForm = ({ id }: { id: string }) => {
+  const { addTask, tasksTodo } = useTasks();
   const taskRef = useRef<HTMLInputElement>(null);
+
+  console.log(tasksTodo);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (taskRef.current?.value && user) {
-      addTask(taskRef.current.value, user?.id);
+    if (taskRef.current?.value) {
+      addTask(taskRef.current.value, id);
       taskRef.current.value = "";
     }
   };
