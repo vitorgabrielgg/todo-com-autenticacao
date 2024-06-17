@@ -1,9 +1,13 @@
 import { TaskContext } from "@/contexts";
-import { createTask, deleteTask, getTasks } from "@/services";
+import { completedTask, createTask, deleteTask, getTasks } from "@/services";
 import { useCallback, useContext } from "react";
 
 export const useTasks = () => {
   const { tasksTodo, setTasksTodo } = useContext(TaskContext);
+
+  const tasksCompletedLength = tasksTodo.filter(
+    (task) => task.completed
+  ).length;
 
   const listTasks = useCallback(
     async (id: string) => {
@@ -27,10 +31,29 @@ export const useTasks = () => {
     setTasksTodo(tasksTodo.filter((task) => task.id !== id));
   };
 
+  const changeCompletedTask = async (id: string, completed: boolean) => {
+    const { msg } = await completedTask(id, completed);
+
+    const newTasksArray = tasksTodo.map((task) => {
+      if (task.id === id) {
+        return {
+          ...task,
+          completed: !task.completed,
+        };
+      }
+
+      return task;
+    });
+
+    setTasksTodo(newTasksArray);
+  };
+
   return {
     tasksTodo,
+    tasksCompletedLength,
     addTask,
     listTasks,
     removeTask,
+    changeCompletedTask,
   };
 };

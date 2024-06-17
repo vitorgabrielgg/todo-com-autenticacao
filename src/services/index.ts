@@ -11,3 +11,5 @@ export * from "./task/createTask/index";
 export * from "./task/getTasks/index";
 
 export * from "./task/deleteTask/index";
+
+export * from "./task/completedTask/index";

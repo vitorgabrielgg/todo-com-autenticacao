@@ -52,4 +52,20 @@ export const taskServices = {
 
     return NextResponse.json({ msg: "A task foi removida" });
   },
+
+  completeTask: async (req: NextRequest, { params }: ParamsTask) => {
+    const { id } = params;
+    const { completed } = await req.json();
+
+    await prisma.task.update({
+      where: {
+        id,
+      },
+      data: {
+        completed: !completed,
+      },
+    });
+
+    return NextResponse.json({ msg: "A task foi atualizada" });
+  },
 };

@@ -13,3 +13,7 @@ export async function POST(req: NextRequest, { params }: ParamsTask) {
 export async function DELETE(req: NextRequest, { params }: ParamsTask) {
   return taskServices.deleteTask(req, { params });
 }
+
+export async function PATCH(req: NextRequest, { params }: ParamsTask) {
+  return taskServices.completeTask(req, { params });
+}

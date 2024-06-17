@@ -10,7 +10,7 @@ interface TaskProps {
 }
 
 export const Task = ({ completed, text, id }: TaskProps) => {
-  const { removeTask } = useTasks();
+  const { removeTask, changeCompletedTask } = useTasks();
 
   return (
     <div
@@ -19,7 +19,10 @@ export const Task = ({ completed, text, id }: TaskProps) => {
         completed && "border-white border-opacity-50"
       } transition-all`}
     >
-      <div className="flex items-center gap-4 flex-1 h-full  max-[374px]:px-3 px-5">
+      <div
+        className="flex items-center gap-4 flex-1 h-full max-[374px]:px-3 px-5"
+        onClick={() => changeCompletedTask(id, completed)}
+      >
         <button
           className={`w-7 h-7 ${
             !completed && "border border-white"
@@ -30,7 +33,13 @@ export const Task = ({ completed, text, id }: TaskProps) => {
           />
         </button>
         <div className="">
-          <p className={`text-lg transition-all`}>{text}</p>
+          <p
+            className={`${
+              completed && "line-through opacity-50"
+            } text-lg transition-all`}
+          >
+            {text}
+          </p>
         </div>
       </div>
       <div className="h-full" onClick={() => removeTask(id)}>
