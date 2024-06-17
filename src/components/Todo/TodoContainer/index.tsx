@@ -4,6 +4,7 @@ import { useTasks, useUser } from "@/hooks";
 import { InfoTasks } from "../InfoTasks";
 import { TodoForm } from "../TodoForm";
 import { useEffect } from "react";
+import { ListTasks } from "../ListTasks";
 
 export const TodoContainer = () => {
   const { tasksTodo, listTasks } = useTasks();
@@ -33,6 +34,8 @@ export const TodoContainer = () => {
             <TodoForm id={user?.id} />
 
             <InfoTasks />
+
+            <ListTasks tasks={tasksTodo} />
           </div>
         </div>
       )}
