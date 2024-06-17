@@ -9,3 +9,5 @@ export * from "./user/getUserInfo/index";
 export * from "./task/createTask/index";
 
 export * from "./task/getTasks/index";
+
+export * from "./task/deleteTask/index";

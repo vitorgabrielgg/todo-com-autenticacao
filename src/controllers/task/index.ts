@@ -40,4 +40,16 @@ export const taskServices = {
 
     return NextResponse.json({ tasks });
   },
+
+  deleteTask: async (req: NextRequest, { params }: ParamsTask) => {
+    const { id } = params;
+
+    await prisma.task.delete({
+      where: {
+        id,
+      },
+    });
+
+    return NextResponse.json({ msg: "A task foi removida" });
+  },
 };

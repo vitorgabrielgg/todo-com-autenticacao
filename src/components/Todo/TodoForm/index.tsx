@@ -7,8 +7,6 @@ export const TodoForm = ({ id }: { id: string }) => {
   const { addTask, tasksTodo } = useTasks();
   const taskRef = useRef<HTMLInputElement>(null);
 
-  console.log(tasksTodo);
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 

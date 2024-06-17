@@ -1,3 +1,4 @@
+import { useTasks } from "@/hooks";
 import React, { FormEvent } from "react";
 import { FaEdit } from "react-icons/fa";
 import { FaCircleCheck, FaTrash } from "react-icons/fa6";
@@ -9,6 +10,8 @@ interface TaskProps {
 }
 
 export const Task = ({ completed, text, id }: TaskProps) => {
+  const { removeTask } = useTasks();
+
   return (
     <div
       id={text}
@@ -30,7 +33,7 @@ export const Task = ({ completed, text, id }: TaskProps) => {
           <p className={`text-lg transition-all`}>{text}</p>
         </div>
       </div>
-      <div className="h-full">
+      <div className="h-full" onClick={() => removeTask(id)}>
         <button className="h-full max-[374px]:px-3 px-5" title="Excluir Tarefa">
           <FaTrash className="text-lg" />
         </button>

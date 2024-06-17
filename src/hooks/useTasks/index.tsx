@@ -1,5 +1,5 @@
 import { TaskContext } from "@/contexts";
-import { createTask, getTasks } from "@/services";
+import { createTask, deleteTask, getTasks } from "@/services";
 import { useCallback, useContext } from "react";
 
 export const useTasks = () => {
@@ -21,9 +21,16 @@ export const useTasks = () => {
     }
   };
 
+  const removeTask = async (id: string) => {
+    const { msg } = await deleteTask(id);
+
+    setTasksTodo(tasksTodo.filter((task) => task.id !== id));
+  };
+
   return {
     tasksTodo,
     addTask,
     listTasks,
+    removeTask,
   };
 };
