@@ -1,5 +1,7 @@
 "use client";
 
+import { TodoContainer } from "@/components";
+
 import { useToken, useUser } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -25,13 +27,5 @@ export default function Home() {
     return null;
   }
 
-  return (
-    <>
-      {isClient && (
-        <div>
-          <p>{user?.name}</p>
-        </div>
-      )}
-    </>
-  );
+  return <>{isClient && <TodoContainer />}</>;
 }
