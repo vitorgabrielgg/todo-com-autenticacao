@@ -1,6 +1,6 @@
 "use client";
 
-import { useToken } from "@/hooks";
+import { useToken, useUser } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -8,11 +8,17 @@ export default function Home() {
   const { token } = useToken();
   const router = useRouter();
 
+  const { user, getUser } = useUser();
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
 
   if (!token) {
     router.push("/login");
@@ -23,7 +29,7 @@ export default function Home() {
     <>
       {isClient && (
         <div>
-          <p>Todo Page</p>
+          <p>{user?.name}</p>
         </div>
       )}
     </>

@@ -36,7 +36,7 @@ export const loginController = {
     try {
       const secret = String(process.env.SECRET);
 
-      const jwtToken = Jwt.sign({ id: user.id }, secret, { expiresIn: "60m" });
+      const jwtToken = Jwt.sign({ id: user.id }, secret);
 
       return NextResponse.json({
         jwtToken,
