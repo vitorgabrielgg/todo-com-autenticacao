@@ -1,14 +1,15 @@
 "use client";
 
 import { useTasks, useUser } from "@/hooks";
+import { useEffect } from "react";
+
 import { InfoTasks } from "../InfoTasks";
 import { TodoForm } from "../TodoForm";
-import { useEffect } from "react";
 import { ListTasks } from "../ListTasks";
 
 export const TodoContainer = () => {
   const { tasksTodo, listTasks } = useTasks();
-  const { user, getUser } = useUser();
+  const { user, getUser, logoutUser } = useUser();
 
   useEffect(() => {
     getUser();
@@ -27,7 +28,10 @@ export const TodoContainer = () => {
           <div className="max-w-4xl w-full px-5 mt-10">
             <div className="flex justify-between">
               <h1 className="font-bold text-4xl">Todo</h1>
-              <button className="bg-red-600 text-white py-2 px-4 rounded">
+              <button
+                className="bg-red-600 text-white py-2 px-4 rounded"
+                onClick={logoutUser}
+              >
                 Sair
               </button>
             </div>
