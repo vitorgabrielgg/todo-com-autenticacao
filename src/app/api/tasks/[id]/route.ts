@@ -17,3 +17,7 @@ export async function DELETE(req: NextRequest, { params }: ParamsTask) {
 export async function PATCH(req: NextRequest, { params }: ParamsTask) {
   return taskServices.completeTask(req, { params });
 }
+
+export async function PUT(req: NextRequest, { params }: ParamsTask) {
+  return taskServices.changeTextTask(req, { params });
+}

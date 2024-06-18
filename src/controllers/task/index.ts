@@ -68,4 +68,20 @@ export const taskServices = {
 
     return NextResponse.json({ msg: "A task foi atualizada" });
   },
+
+  changeTextTask: async(req: NextRequest, {params}: ParamsTask) => {
+    const {id} = params
+    const {text} = await req.json()
+
+    await prisma.task.update({
+      where:{
+        id
+      },
+      data:{
+        text
+      }
+    })
+
+    return NextResponse.json({msg: 'O texto da task foi atualizado'})
+  },
 };

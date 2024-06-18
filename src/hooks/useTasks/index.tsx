@@ -1,5 +1,11 @@
 import { TaskContext } from "@/contexts";
-import { completedTask, createTask, deleteTask, getTasks } from "@/services";
+import {
+  changeTextTask,
+  completedTask,
+  createTask,
+  deleteTask,
+  getTasks,
+} from "@/services";
 import { useCallback, useContext } from "react";
 
 export const useTasks = () => {
@@ -48,6 +54,10 @@ export const useTasks = () => {
     setTasksTodo(newTasksArray);
   };
 
+  const changeTextOfTask = async (id: string, text: string) => {
+    const { msg } = await changeTextTask(id, text);
+  };
+
   return {
     tasksTodo,
     tasksCompletedLength,
@@ -55,5 +65,6 @@ export const useTasks = () => {
     listTasks,
     removeTask,
     changeCompletedTask,
+    changeTextOfTask,
   };
 };
