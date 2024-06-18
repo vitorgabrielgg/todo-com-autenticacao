@@ -21,6 +21,7 @@ const RegisterPage = () => {
   }
   return (
     <>
+      <title>Registrar-se</title>
       {isClient && (
         <div className="w-full">
           <Container className="max-w-lg px-5">

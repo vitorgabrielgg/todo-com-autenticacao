@@ -22,6 +22,7 @@ const LoginPage = () => {
 
   return (
     <>
+      <title>Login</title>;
       {isClient && (
         <div className="w-full">
           <Container className="max-w-lg px-5">
