@@ -1,16 +1,18 @@
 "use client";
 
-import { useTasks, useUser } from "@/hooks";
+import { LoadingComponent } from "@/components/Loading/LoadingComponent";
+import { useLoading, useTasks, useUser } from "@/hooks";
 import { FormEvent, useRef } from "react";
 
 export const TodoForm = ({ id }: { id: string }) => {
   const { addTask, tasksTodo } = useTasks();
+  const { loading } = useLoading();
   const taskRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (taskRef.current?.value) {
+    if (taskRef.current?.value && !loading) {
       addTask(taskRef.current.value, id);
       taskRef.current.value = "";
     }
@@ -23,7 +25,7 @@ export const TodoForm = ({ id }: { id: string }) => {
     >
       <input
         type="text"
-        className="max-[374px]:w-full w-[62%] sm:w-3/4 text-black placeholder:text-black py-2 pl-4 rounded"
+        className="max-[374px]:w-full w-[62%] sm:w-3/4 text-black placeholder:text-black py-2 pl-4 rounded outline-none"
         placeholder="Insira uma tarefa"
         name="task"
         ref={taskRef}
@@ -32,7 +34,7 @@ export const TodoForm = ({ id }: { id: string }) => {
         type="submit"
         className="max-[374px]:w-full w-[38%] sm:w-1/4 bg-green-600 text-white py-2 px-4 rounded"
       >
-        Criar Tarefa
+        {loading ? <LoadingComponent className="text-2xl" /> : "Criar Tarefa"}
       </button>
     </form>
   );

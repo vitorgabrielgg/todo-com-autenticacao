@@ -5,3 +5,5 @@ export * from "./useToken/index";
 export * from "./useUser/index";
 
 export * from "./useTasks/index";
+
+export * from "./useLoading/index";

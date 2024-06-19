@@ -3,20 +3,13 @@
 import { Input } from "../Input";
 import { ButtonForm } from "../ButtonForm";
 import { LinkForm } from "../LinkForm";
-import { FormAuthType, useFormAuth } from "@/hooks";
-import { useRouter } from "next/navigation";
-import { createUser } from "@/services";
+import { useFormAuth, useLoading, useUser } from "@/hooks";
+import { LoadingComponent } from "@/components/Loading/LoadingComponent";
 
 export const FormRegister = () => {
   const { errors, register, handleSubmit } = useFormAuth();
-  const router = useRouter();
-
-  const registerUser = async (data: FormAuthType) => {
-    const { msg } = await createUser(data);
-    if (msg.type === "success") {
-      router.push("/login");
-    }
-  };
+  const { loading } = useLoading();
+  const { registerUser } = useUser();
 
   return (
     <form
@@ -50,7 +43,9 @@ export const FormRegister = () => {
 
       <LinkForm text="Login" href="/login" />
 
-      <ButtonForm text="Registrar" />
+      <ButtonForm>
+        {loading ? <LoadingComponent className="text-2xl" /> : "Registrar"}
+      </ButtonForm>
     </form>
   );
 };

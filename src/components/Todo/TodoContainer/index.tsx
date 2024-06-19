@@ -1,6 +1,6 @@
 "use client";
 
-import { useTasks, useUser } from "@/hooks";
+import { useLoading, useTasks, useUser } from "@/hooks";
 import { useEffect } from "react";
 
 import { InfoTasks } from "../InfoTasks";
@@ -10,6 +10,7 @@ import { ListTasks } from "../ListTasks";
 export const TodoContainer = () => {
   const { tasksTodo, listTasks } = useTasks();
   const { user, getUser, logoutUser } = useUser();
+  const { loading, setLoading } = useLoading();
 
   useEffect(() => {
     getUser();

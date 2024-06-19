@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { TaskContextProvider } from "@/components";
+import { LoadingContextProvider, TaskContextProvider } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <TaskContextProvider>
-        <body className={inter.className}>{children}</body>
-      </TaskContextProvider>
+      <LoadingContextProvider>
+        <TaskContextProvider>
+          <body className={inter.className}>{children}</body>
+        </TaskContextProvider>
+      </LoadingContextProvider>
     </html>
   );
 }

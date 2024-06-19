@@ -7,9 +7,12 @@ import {
   getTasks,
 } from "@/services";
 import { useCallback, useContext } from "react";
+import { useLoading } from "../useLoading";
 
 export const useTasks = () => {
   const { tasksTodo, setTasksTodo } = useContext(TaskContext);
+
+  const { setLoading } = useLoading();
 
   const tasksCompletedLength = tasksTodo.filter(
     (task) => task.completed
@@ -24,10 +27,16 @@ export const useTasks = () => {
   );
 
   const addTask = async (text: string, id: string) => {
-    const { task } = await createTask(text, id);
+    try {
+      setLoading(true);
 
-    if (task) {
-      setTasksTodo([...tasksTodo, task]);
+      const { task } = await createTask(text, id);
+
+      if (task) {
+        setTasksTodo([...tasksTodo, task]);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
