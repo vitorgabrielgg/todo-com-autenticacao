@@ -10,12 +10,15 @@
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.17.0",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
