@@ -3,6 +3,7 @@
 import { formAuthType } from "@/@types";
 import { registerUser } from "@/services/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -38,9 +39,18 @@ export const useFormAuth = () => {
     }
   };
 
+  const loginSubmit = async (data: formAuthType) => {
+    const res = await signIn("credentials", { ...data, redirect: false });
+
+    if (!res?.error) {
+      router.push("/");
+    }
+  };
+
   return {
     errors,
     handleSubmit,
+    loginSubmit,
     register,
     registerSubmit,
   };
