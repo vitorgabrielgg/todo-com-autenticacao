@@ -21,19 +21,25 @@ class RegisterService {
       return {
         message: {
           text: "Este e-mail está sendo usado por outro usuário",
+          status: "error",
         },
       };
     }
 
     const hashPassword = await hash(password, 8);
 
-    const user = await registerRepository.create({
+    await registerRepository.create({
       name,
       email,
       password: hashPassword,
     });
 
-    return user;
+    return {
+      message: {
+        text: "Usuário criado com sucesso",
+        status: "success",
+      },
+    };
   }
 }
 
