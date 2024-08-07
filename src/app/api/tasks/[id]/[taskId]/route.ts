@@ -11,3 +11,7 @@ export async function DELETE(req: NextRequest, { params }: IParams) {
 export async function PATCH(req: NextRequest, { params }: IParams) {
   return tasksController.changeCompletedTask(req, { params });
 }
+
+export async function PUT(req: NextRequest, { params }: IParams) {
+  return tasksController.changeTextTask(req, { params });
+}

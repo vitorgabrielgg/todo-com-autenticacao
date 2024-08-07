@@ -57,6 +57,15 @@ class TasksController {
 
     return NextResponse.json(taskUpdate);
   }
+
+  async changeTextTask(req: NextRequest, { params }: IParams) {
+    const { id, taskId } = params;
+    const { text } = await req.json();
+
+    const task = await tasksService.changeTextTask(id, taskId, text);
+
+    return NextResponse.json(task);
+  }
 }
 
 export { TasksController };

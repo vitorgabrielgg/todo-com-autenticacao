@@ -26,6 +26,10 @@ class TasksService {
   ) {
     return tasksRepository.changeCompletedTask(id, taskId, completed);
   }
+
+  async changeTextTask(id: string, taskId: string | undefined, text: string) {
+    return tasksRepository.changeTextTask(id, taskId, text);
+  }
 }
 
 export { TasksService };

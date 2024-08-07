@@ -61,6 +61,20 @@ class TasksRepository {
 
     return task;
   }
+
+  async changeTextTask(id: string, taskId: string | undefined, text: string) {
+    const task = await prisma.task.update({
+      where: {
+        userId: id,
+        id: taskId,
+      },
+      data: {
+        text,
+      },
+    });
+
+    return task;
+  }
 }
 
 export { TasksRepository };
