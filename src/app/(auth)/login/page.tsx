@@ -13,7 +13,7 @@ export default function Login() {
     if (status === "authenticated") {
       router.push("/");
     }
-  });
+  }, [status, router]);
 
   if (status !== "unauthenticated") {
     return null;

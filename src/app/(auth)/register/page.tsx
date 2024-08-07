@@ -13,7 +13,7 @@ export default function Register() {
     if (status === "authenticated") {
       router.push("/");
     }
-  });
+  }, [status, router]);
 
   if (status !== "unauthenticated") {
     return null;
