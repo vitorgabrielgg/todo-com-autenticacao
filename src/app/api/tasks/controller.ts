@@ -13,6 +13,14 @@ class TasksController {
 
     return NextResponse.json(task);
   }
+
+  async listTasks(req: NextRequest, { params }: IParams) {
+    const { id } = params;
+
+    const tasks = await tasksService.listTasks(id);
+
+    return NextResponse.json(tasks);
+  }
 }
 
 export { TasksController };
