@@ -29,6 +29,14 @@ class TasksController {
 
     return NextResponse.json(task);
   }
+
+  async deleteAllTasks(req: NextRequest, { params }: IParams) {
+    const { id } = params;
+
+    const tasks = await tasksService.deleteAllTasks(id);
+
+    return NextResponse.json(tasks);
+  }
 }
 
 export { TasksController };

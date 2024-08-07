@@ -11,3 +11,7 @@ export async function POST(req: NextRequest, { params }: IParams) {
 export async function GET(req: NextRequest, { params }: IParams) {
   return tasksController.listTasks(req, { params });
 }
+
+export async function DELETE(req: NextRequest, { params }: IParams) {
+  return tasksController.deleteAllTasks(req, { params });
+}

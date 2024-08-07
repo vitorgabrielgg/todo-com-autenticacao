@@ -14,6 +14,10 @@ class TasksService {
   async deleteTask(id: string, taskId: string | undefined) {
     return tasksRepository.deleteTask(id, taskId);
   }
+
+  async deleteAllTasks(id: string) {
+    return tasksRepository.deleteAllTasks(id);
+  }
 }
 
 export { TasksService };
