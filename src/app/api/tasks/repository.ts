@@ -43,6 +43,24 @@ class TasksRepository {
 
     return tasks;
   }
+
+  async changeCompletedTask(
+    id: string,
+    taskId: string | undefined,
+    completed: boolean
+  ) {
+    const task = await prisma.task.update({
+      where: {
+        userId: id,
+        id: taskId,
+      },
+      data: {
+        completed,
+      },
+    });
+
+    return task;
+  }
 }
 
 export { TasksRepository };

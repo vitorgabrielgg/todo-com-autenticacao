@@ -7,3 +7,7 @@ const tasksController = new TasksController();
 export async function DELETE(req: NextRequest, { params }: IParams) {
   return tasksController.deleteTask(req, { params });
 }
+
+export async function PATCH(req: NextRequest, { params }: IParams) {
+  return tasksController.changeCompletedTask(req, { params });
+}

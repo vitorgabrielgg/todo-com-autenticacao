@@ -18,6 +18,14 @@ class TasksService {
   async deleteAllTasks(id: string) {
     return tasksRepository.deleteAllTasks(id);
   }
+
+  async changeCompletedTask(
+    id: string,
+    taskId: string | undefined,
+    completed: boolean
+  ) {
+    return tasksRepository.changeCompletedTask(id, taskId, completed);
+  }
 }
 
 export { TasksService };
