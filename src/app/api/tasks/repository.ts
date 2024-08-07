@@ -22,6 +22,17 @@ class TasksRepository {
 
     return tasks;
   }
+
+  async deleteTask(id: string, taskId: string | undefined) {
+    const task = await prisma.task.delete({
+      where: {
+        userId: id,
+        id: taskId,
+      },
+    });
+
+    return task;
+  }
 }
 
 export { TasksRepository };

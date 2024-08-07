@@ -1,3 +1,3 @@
 export interface IParams {
-  params: { id: string };
+  params: { id: string; taskId?: string };
 }
