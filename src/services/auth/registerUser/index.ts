@@ -2,7 +2,7 @@ import { formAuthType } from "@/@types";
 
 export const registerUser = async (data: formAuthType) => {
   try {
-    const res = await fetch("api/register", {
+    const res = await fetch("api/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,12 +3,12 @@ import { IUser } from "@/@types";
 import prisma from "../../../../db";
 
 import { hash } from "bcrypt";
-import { RegisterRepository } from "./repository";
+import { UserRepository } from "./repository";
 
-const registerRepository = new RegisterRepository();
+const userRepository = new UserRepository();
 
-class RegisterService {
-  async create(data: IUser) {
+class UserService {
+  async createUser(data: IUser) {
     const { name, email, password } = data;
 
     const userExists = await prisma.user.findUnique({
@@ -28,7 +28,7 @@ class RegisterService {
 
     const hashPassword = await hash(password, 8);
 
-    await registerRepository.create({
+    await userRepository.createUser({
       name,
       email,
       password: hashPassword,
@@ -41,6 +41,10 @@ class RegisterService {
       },
     };
   }
+
+  async getUser(email: string | undefined) {
+    return userRepository.getUser(email);
+  }
 }
 
-export { RegisterService };
+export { UserService };

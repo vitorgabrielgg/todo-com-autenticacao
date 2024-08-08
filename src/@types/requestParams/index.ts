@@ -1,6 +1,7 @@
 export interface IParams {
   params: {
-    id: string;
+    id?: string;
     taskId?: string;
+    email?: string;
   };
 }
