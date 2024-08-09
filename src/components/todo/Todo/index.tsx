@@ -5,6 +5,7 @@ import { UserOptions } from "../UserOptions";
 import { FormTodo } from "../FormTodo";
 import { InfoTasks } from "../InfoTasks";
 import { useAccount } from "@/hooks";
+import { ListTasks } from "../ListTasks";
 
 export const Todo = () => {
   const { fetchUserId } = useAccount();
@@ -22,6 +23,7 @@ export const Todo = () => {
 
       <FormTodo />
       <InfoTasks />
+      <ListTasks />
     </main>
   );
 };

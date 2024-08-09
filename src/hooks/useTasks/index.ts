@@ -1,13 +1,14 @@
-import { createTask } from "@/services/task";
+import { createTask, listTasks } from "@/services/task";
 import { useTodoStore } from "@/store";
+import { useCallback } from "react";
 
 export const useTasks = () => {
-  const [userId, addTask, tasks] = useTodoStore((state) => [
+  const [userId, tasks, addTask, getAllTasks] = useTodoStore((state) => [
     state.userId,
-    state.addTask,
     state.tasks,
+    state.addTask,
+    state.getAllTasks,
   ]);
-  console.log(tasks);
 
   const postTask = async (text: string) => {
     const res = await createTask(text, userId);
@@ -15,7 +16,13 @@ export const useTasks = () => {
     addTask(res);
   };
 
+  const getTasks = useCallback(async () => {
+    const res = await listTasks(userId);
+    getAllTasks(res);
+  }, [getAllTasks, userId]);
+
   return {
     postTask,
+    getTasks,
   };
 };

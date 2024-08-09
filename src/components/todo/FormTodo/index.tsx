@@ -17,7 +17,10 @@ export const FormTodo = () => {
   const handleSubmit = (e: FormEvent<YourFormElement>) => {
     e.preventDefault();
     const text = e.currentTarget.elements.task.value;
-    postTask(text);
+
+    if (text !== "") {
+      postTask(text);
+    }
 
     e.currentTarget.elements.task.value = "";
   };
