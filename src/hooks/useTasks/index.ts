@@ -1,17 +1,21 @@
-import { createTask, deleteTask, listTasks } from "@/services/task";
+import {
+  changeCompleted,
+  createTask,
+  deleteTask,
+  listTasks,
+} from "@/services/task";
 import { useTodoStore } from "@/store";
 import { useCallback } from "react";
 
 export const useTasks = () => {
-  const [userId, tasks, addTask, getAllTasks, removeTask] = useTodoStore(
-    (state) => [
-      state.userId,
-      state.tasks,
-      state.addTask,
-      state.getAllTasks,
-      state.removeTask,
-    ]
-  );
+  const {
+    userId,
+    tasks,
+    addTask,
+    getAllTasks,
+    removeTask,
+    changeCompletedStatus,
+  } = useTodoStore();
 
   console.log(tasks);
 
@@ -31,9 +35,15 @@ export const useTasks = () => {
     deleteTask(taskId, userId);
   };
 
+  const updateCompletedTask = (taskId: string, userId: string) => {
+    changeCompletedStatus(taskId);
+    changeCompleted(taskId, userId);
+  };
+
   return {
     deleteOneTask,
     getTasks,
     postTask,
+    updateCompletedTask
   };
 };
