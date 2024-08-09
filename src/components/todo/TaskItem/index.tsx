@@ -3,9 +3,11 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { ActionIcon } from "../ActionIcon";
 import { SquarePen, Trash2 } from "lucide-react";
+import { useTasks } from "@/hooks";
 
-export const TaskItem = ({ completed, id, text }: ITask) => {
+export const TaskItem = ({ completed, id, text, userId }: ITask) => {
   const [openEditInput, setOpenEditInput] = useState(false);
+  const { deleteOneTask } = useTasks();
 
   return (
     <div className="h-14 border border-white rounded flex items-center justify-between pl-5">
@@ -21,7 +23,7 @@ export const TaskItem = ({ completed, id, text }: ITask) => {
       </div>
 
       <div className="h-full">
-        <ActionIcon icon={Trash2} />
+        <ActionIcon icon={Trash2} onClick={() => deleteOneTask(id, userId)} />
         <ActionIcon icon={SquarePen} />
       </div>
     </div>

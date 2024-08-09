@@ -1,16 +1,21 @@
+import { Button } from "@/components/ui/button";
 import { LucideProps } from "lucide-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import {
+  ButtonHTMLAttributes,
+  ForwardRefExoticComponent,
+  RefAttributes,
+} from "react";
 
-interface ActionIconProps {
+interface ActionIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
 }
 
-export const ActionIcon = ({ icon: Icon }: ActionIconProps) => {
+export const ActionIcon = ({ icon: Icon, onClick }: ActionIconProps) => {
   return (
-    <button className="px-5 h-full">
+    <Button className="px-5 h-full" onClick={onClick}>
       <Icon className="text-white w-5" />
-    </button>
+    </Button>
   );
 };
