@@ -3,32 +3,32 @@ import { Input } from "@/components/ui/input";
 import { useTasks } from "@/hooks";
 import React, { FormEvent } from "react";
 
-interface FormElements extends HTMLFormControlsCollection {
-  task: HTMLInputElement;
-}
+// interface FormElements extends HTMLFormControlsCollection {
+//   task: HTMLInputElement;
+// }
 
-interface YourFormElement extends HTMLFormElement {
-  readonly elements: FormElements;
-}
+// interface YourFormElement extends HTMLFormElement {
+//   readonly elements: FormElements;
+// }
 
 export const FormTodo = () => {
-  const { postTask } = useTasks();
+  const { postTask, handleSubmitTask } = useTasks();
 
-  const handleSubmit = (e: FormEvent<YourFormElement>) => {
-    e.preventDefault();
-    const text = e.currentTarget.elements.task.value;
+  // const handleSubmit = (e: FormEvent<YourFormElement>) => {
+  //   e.preventDefault();
+  //   const text = e.currentTarget.elements.task.value;
 
-    if (text !== "") {
-      postTask(text);
-    }
+  //   if (text !== "") {
+  //     postTask(text);
+  //   }
 
-    e.currentTarget.elements.task.value = "";
-  };
+  //   e.currentTarget.elements.task.value = "";
+  // };
 
   return (
     <form
       className="mt-8 w-2/ flex flex-col min-[450px]:flex-row gap-4 min-[450px]:gap-6"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmitTask}
     >
       <Input
         placeholder="Insira uma tarefa"

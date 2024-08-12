@@ -12,9 +12,9 @@ interface ActionIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   >;
 }
 
-export const ActionIcon = ({ icon: Icon, onClick }: ActionIconProps) => {
+export const ActionIcon = ({ icon: Icon, onClick, title }: ActionIconProps) => {
   return (
-    <Button className="px-5 h-full" onClick={onClick}>
+    <Button className="px-5 h-full" onClick={onClick} title={title}>
       <Icon className="text-white w-5" />
     </Button>
   );

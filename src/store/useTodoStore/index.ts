@@ -6,6 +6,7 @@ interface StoreType {
   tasks: ITask[];
   addTask: (task: ITask) => void;
   changeCompletedStatus: (id: string) => void;
+  changeTextTask: (id: string, text: string) => void;
   getAllTasks: (tasks: ITask[]) => void;
   removeTask: (id: string) => void;
   setUserId: (id: string) => void;
@@ -22,6 +23,18 @@ export const useTodoStore = create<StoreType>()((set) => ({
           return {
             ...task,
             completed: !task.completed,
+          };
+        }
+        return task;
+      }),
+    })),
+  changeTextTask: (id, text) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            text,
           };
         }
         return task;

@@ -1,23 +1,26 @@
+import { YourFormElement } from "@/@types";
 import {
   changeCompleted,
   createTask,
   deleteTask,
   listTasks,
 } from "@/services/task";
+import { changeText } from "@/services/task/changeText";
 import { useTodoStore } from "@/store";
-import { useCallback } from "react";
+import { FormEvent, useCallback } from "react";
 
 export const useTasks = () => {
   const {
     userId,
     tasks,
     addTask,
+    changeCompletedStatus,
+    changeTextTask,
     getAllTasks,
     removeTask,
-    changeCompletedStatus,
   } = useTodoStore();
 
-  console.log(tasks);
+  //console.log(tasks);
 
   const postTask = async (text: string) => {
     const res = await createTask(text, userId);
@@ -30,20 +33,46 @@ export const useTasks = () => {
     getAllTasks(res);
   }, [getAllTasks, userId]);
 
-  const deleteOneTask = (taskId: string, userId: string) => {
+  const deleteOneTask = (taskId: string) => {
     removeTask(taskId);
     deleteTask(taskId, userId);
   };
 
-  const updateCompletedTask = (taskId: string, userId: string) => {
+  const updateCompletedTask = (taskId: string) => {
     changeCompletedStatus(taskId);
     changeCompleted(taskId, userId);
+  };
+
+  const updateTextTask = (taskId: string, text: string) => {
+    changeTextTask(taskId, text);
+    changeText(taskId, userId, text);
+  };
+
+  const handleSubmitTask = (e: FormEvent<YourFormElement>, taskId?: string) => {
+    e.preventDefault();
+    const text = e.currentTarget.elements.task?.value;
+
+    if (taskId) {
+      if (text !== "") {
+        updateTextTask(taskId, text);
+        e.currentTarget.elements.task.value = "";
+      }
+
+      return;
+    }
+
+    if (text !== "") {
+      postTask(text);
+      e.currentTarget.elements.task.value = "";
+    }
   };
 
   return {
     deleteOneTask,
     getTasks,
+    handleSubmitTask,
     postTask,
-    updateCompletedTask
+    updateCompletedTask,
+    updateTextTask,
   };
 };
