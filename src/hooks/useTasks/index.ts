@@ -20,7 +20,9 @@ export const useTasks = () => {
     removeTask,
   } = useTodoStore();
 
-  //console.log(tasks);
+  const tasksLength = tasks.length;
+  const tasksCompletedLength =
+    tasks.length > 0 && tasks.filter((task) => task.completed).length;
 
   const postTask = async (text: string) => {
     const res = await createTask(text, userId);
@@ -68,6 +70,8 @@ export const useTasks = () => {
   };
 
   return {
+    tasksCompletedLength,
+    tasksLength,
     deleteOneTask,
     getTasks,
     handleSubmitTask,
