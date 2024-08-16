@@ -1,4 +1,3 @@
-import { getUserId } from "@/services/auth";
 import { useTodoStore } from "@/store";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -14,12 +13,11 @@ export const useAccount = () => {
 
   const { data: session } = useSession();
 
-  const fetchUserId = useCallback(async () => {
-    const res = await getUserId(session?.user?.email);
-    if (res) {
-      setUserId(res);
+  const fetchUserId = useCallback(() => {
+    if (session) {
+      setUserId(session.user.id);
     }
-  }, [session?.user?.email, setUserId]);
+  }, [session, setUserId]);
 
   const logoutAccount = () => {
     signOut();

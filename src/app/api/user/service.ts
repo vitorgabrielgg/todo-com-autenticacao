@@ -41,10 +41,6 @@ class UserService {
       },
     };
   }
-
-  async getUser(email: string | undefined) {
-    return userRepository.getUser(email);
-  }
 }
 
 export { UserService };

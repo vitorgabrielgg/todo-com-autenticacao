@@ -12,14 +12,6 @@ class UserController {
 
     return NextResponse.json(response);
   }
-
-  async getUser(req: NextRequest, { params }: IParams) {
-    const { email } = params;
-
-    const id = await userService.getUser(email);
-
-    return NextResponse.json(id);
-  }
 }
 
 export { UserController };

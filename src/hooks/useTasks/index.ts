@@ -31,8 +31,10 @@ export const useTasks = () => {
   };
 
   const getTasks = useCallback(async () => {
-    const res = await listTasks(userId);
-    getAllTasks(res);
+    if (userId) {
+      const res = await listTasks(userId);
+      getAllTasks(res);
+    }
   }, [getAllTasks, userId]);
 
   const deleteOneTask = (taskId: string) => {

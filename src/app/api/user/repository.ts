@@ -9,16 +9,6 @@ class UserRepository {
 
     return user;
   }
-
-  async getUser(email: string | undefined) {
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-
-    return user?.id;
-  }
 }
 
 export { UserRepository };

@@ -48,6 +48,18 @@ const handler = NextAuth({
     signIn: "/login",
     signOut: "/",
   },
+  callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
+  },
+  session: {
+    strategy: "jwt",
+  },
 });
 
 export { handler as GET, handler as POST };
