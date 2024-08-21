@@ -32,9 +32,9 @@ export const useFormAuth = () => {
   const router = useRouter();
 
   const registerSubmit = async (data: formAuthType) => {
-    const { response } = await registerUser(data);
+    const { message } = await registerUser(data);
 
-    if (response.message.status === "success") {
+    if (message.status === "success") {
       router.push("/login");
     }
   };
