@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "../useToast";
 
 export const formAuthSchema = z.object({
   name: z.string().min(1, "Por favor, insira um nome").optional(),
@@ -29,10 +30,14 @@ export const useFormAuth = () => {
     resolver: zodResolver(formAuthSchema),
   });
 
+  const { handleToast } = useToast();
+
   const router = useRouter();
 
   const registerSubmit = async (data: formAuthType) => {
     const { message } = await registerUser(data);
+
+    handleToast(message.status, message.text);
 
     if (message.status === "success") {
       router.push("/login");
@@ -44,6 +49,8 @@ export const useFormAuth = () => {
 
     if (!res?.error) {
       router.push("/");
+    } else {
+      handleToast("error", res.error);
     }
   };
 

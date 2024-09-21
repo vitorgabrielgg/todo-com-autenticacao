@@ -36,10 +36,10 @@ const handler = NextAuth({
           if (validPassword) {
             return user;
           } else {
-            throw new Error("Credenciais incorretas");
+            throw new Error("O e-mail e/ou senha estão incorretos.");
           }
         } else {
-          throw new Error("Credenciais incorretas");
+          throw new Error("O e-mail e/ou senha estão incorretos.");
         }
       },
     }),
